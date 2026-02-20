@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>California AB 703 – Fight Childhood Cancer With Your Tax Return</title>
+<style>
+  :root {
+    --gold: #C8962E;
+    --dark: #1a1a2e;
+    --blue: #16213e;
+    --accent: #e94560;
+    --light-bg: #f8f9fc;
+    --border: #e2e8f0;
+    --text: #2d3748;
+    --muted: #718096;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--light-bg); color: var(--text); line-height: 1.6; }
+
+  /* HEADER */
+  header { background: linear-gradient(135deg, var(--dark) 0%, var(--blue) 100%); color: #fff; padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(200,150,46,.15) 0%, transparent 70%); pointer-events: none; }
+  .bill-badge { display: inline-block; background: var(--gold); color: #fff; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 14px; }
+  header h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 8px; }
+  header p { font-size: 1rem; opacity: .85; max-width: 560px; margin: 0 auto; }
+
+  /* ALERT */
+  .alert { background: linear-gradient(90deg, #7f1d1d, #991b1b); color: #fff; padding: 16px 24px; text-align: center; font-size: .95rem; }
+  .alert strong { color: #fca5a5; }
+
+  /* MAIN */
+  main { max-width: 860px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
+  .step { display: flex; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+  .step-num { flex-shrink: 0; width: 44px; height: 44px; background: var(--gold); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; }
+  .step-body h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
+  .step-body p { font-size: .95rem; color: var(--text); }
+  .fund-box { margin-top: 12px; background: #fff; border: 2px solid var(--gold); border-radius: 10px; padding: 14px 18px; display: inline-block; }
+  .fund-box .fund-name { font-weight: 700; font-size: 1rem; color: var(--dark); }
+  .fund-box .fund-code { font-size: .85rem; color: var(--muted); margin-top: 2px; }
+
+  /* DONATION GRID */
+  .donation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 14px 0; }
+  .dg-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
+  .dg-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 4px; }
+  .dg-val { font-size: .9rem; font-weight: 700; color: var(--dark); }
+  .example-box { background: #fffbeb; border-left: 4px solid var(--gold); border-radius: 6px; padding: 12px 16px; margin-top: 12px; font-size: .9rem; }
+
+  /* SECTION TITLE */
+  .section-title { font-size: 1.35rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+  .section-sub { color: var(--muted); font-size: .9rem; margin-bottom: 24px; }
+
+  /* TABS */
+  .tabs-wrap { margin-bottom: 48px; }
+  .tab-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .tab-btn { border: 2px solid var(--border); background: #fff; border-radius: 8px; padding: 9px 18px; font-size: .9rem; font-weight: 600; cursor: pointer; transition: all .2s; color: var(--text); }
+  .tab-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .tab-btn.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .tab-panel { display: none; background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+  .tab-panel.active { display: block; }
+  .tab-panel h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin: 20px 0 8px; }
+  .tab-panel h3:first-child { margin-top: 0; }
+  .tab-panel p, .tab-panel li { font-size: .93rem; color: var(--text); }
+  .tab-panel ol, .tab-panel ul { padding-left: 20px; margin-top: 6px; }
+  .tab-panel li { margin-bottom: 6px; }
+  .img-placeholder { background: #f1f5f9; border: 2px dashed #cbd5e0; border-radius: 8px; padding: 32px; text-align: center; color: var(--muted); font-size: .85rem; margin-top: 14px; }
+  .code-chip { display: inline-block; background: var(--dark); color: var(--gold); font-weight: 700; font-size: .82rem; padding: 2px 10px; border-radius: 20px; letter-spacing: .05em; }
+  .tip-box { background: #f0fdf4; border-left: 4px solid #22c55e; border-radius: 6px; padding: 12px 16px; margin-top: 14px; font-size: .88rem; }
+  .tip-box strong { color: #15803d; }
+
+  /* PAPER FORM VISUAL */
+  .form-visual { border: 2px solid #94a3b8; border-radius: 8px; padding: 16px 20px; margin-top: 14px; font-family: 'Courier New', monospace; font-size: .82rem; background: #fff; }
+  .form-visual .form-header { background: #1e3a5f; color: #fff; padding: 6px 10px; margin: -16px -20px 12px; border-radius: 6px 6px 0 0; font-family: sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .05em; }
+  .form-line { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #cbd5e0; }
+  .form-line:last-child { border-bottom: none; }
+  .form-line .fl-label { color: #475569; }
+  .form-line .fl-code { color: #64748b; font-size: .75rem; }
+  .form-line .fl-box { border: 1.5px solid #334155; width: 80px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 3px; font-weight: 700; color: var(--gold); }
+  .form-line.highlight .fl-label { font-weight: 700; color: var(--dark); }
+  .form-line.highlight .fl-box { border-color: var(--gold); background: #fffbeb; }
+
+  /* ALL METHODS */
+  .all-methods { background: var(--dark); color: #fff; border-radius: 12px; padding: 24px; margin-bottom: 48px; }
+  .all-methods h3 { font-size: 1rem; font-weight: 700; margin-bottom: 12px; color: var(--gold); }
+  .all-methods p { font-size: .9rem; opacity: .9; margin-bottom: 10px; }
+  .methods-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 14px; }
+  .method-chip { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 8px; padding: 10px 12px; text-align: center; font-size: .8rem; font-weight: 600; }
+
+  /* FAQ */
+  .faq { margin-bottom: 48px; }
+  details { background: #fff; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+  summary { padding: 16px 20px; font-weight: 600; font-size: .95rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  summary::after { content: '+'; font-size: 1.2rem; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+  details[open] summary::after { content: '−'; }
+  .faq-body { padding: 0 20px 16px; font-size: .92rem; color: var(--text); border-top: 1px solid var(--border); padding-top: 14px; }
+
+  /* QUOTE */
+  blockquote { background: linear-gradient(135deg, var(--dark), var(--blue)); color: #fff; border-radius: 12px; padding: 32px; text-align: center; margin-bottom: 32px; }
+  blockquote p { font-size: 1.15rem; font-style: italic; margin-bottom: 10px; }
+  blockquote cite { font-size: .85rem; opacity: .8; }
+  .foundation { margin-top: 8px; font-size: .8rem; opacity: .7; }
+
+  /* FOOTER */
+  .share-bar { background: var(--accent); color: #fff; text-align: center; padding: 18px 24px; border-radius: 10px; margin-bottom: 32px; font-weight: 600; font-size: .95rem; }
+  footer { text-align: center; color: var(--muted); font-size: .75rem; padding: 20px; line-height: 1.8; }
+
+  @media(max-width: 560px) {
+    .step { flex-direction: column; gap: 12px; }
+    .donation-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bill-badge">California Assembly Bill 703</div>
+  <h1>Fight Childhood Cancer With Your Tax Return</h1>
+  <p>A simple, step-by-step guide for California taxpayers filing in 2026</p>
+</header>
+
+<div class="alert">
+  ⚠ <strong>Critical:</strong> This fund must reach $250,000 in donations by 2027 or it will be permanently removed from the tax form. Every dollar you give helps keep this lifeline alive.
+</div>
+
+<main>
+
+  <!-- STEPS -->
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h2>File Your California Tax Return</h2>
+        <p>When you file your 2025 California income taxes (due April 15, 2026), you'll use <strong>Form 540</strong> — the California Resident Income Tax Return. This is the same form whether you file through TurboTax®, H&amp;R Block®, a CPA, or on paper.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h2>Find Code 448 in the Voluntary Contributions Section</h2>
+        <p>In tax software, you'll be prompted during your California state return. On paper, it's on <strong>Side 4 of Form 540</strong> in the Contributions section. The fund you're looking for:</p>
+        <div class="fund-box">
+          <div class="fund-name">California Pediatric Cancer Research Voluntary Tax Contribution Fund</div>
+          <div class="fund-code">Code 448 &nbsp;·&nbsp; Form 540, Side 4</div>
+        </div>
+        <!-- Paper Form Visual -->
+        <div class="form-visual">
+          <div class="form-header">FORM 540 — SIDE 4 &nbsp;·&nbsp; CONTRIBUTIONS SECTION (2025 TAX YEAR)</div>
+          <div class="form-line"><span class="fl-label">California Sea Otter Fund</span><span class="fl-code">400</span><div class="fl-box"></div></div>
+          <div class="form-line"><span class="fl-label">School Supplies for Homeless Children</span><span class="fl-code">422</span><div class="fl-box"></div></div>
+          <div class="form-line highlight"><span class="fl-label">✦ CA Pediatric Cancer Research Fund</span><span class="fl-code">448</span><div class="fl-box">$ ___</div></div>
+          <div class="form-line"><span class="fl-label">State Children's Trust Fund</span><span class="fl-code">403</span><div class="fl-box"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h2>Enter Your Donation Amount</h2>
+        <div class="donation-grid">
+          <div class="dg-item"><div class="dg-label">Minimum</div><div class="dg-val">$1</div></div>
+          <div class="dg-item"><div class="dg-label">Increments</div><div class="dg-val">Whole dollars only</div></div>
+          <div class="dg-item"><div class="dg-label">Joint Filers</div><div class="dg-val">Each spouse can contribute</div></div>
+          <div class="dg-item"><div class="dg-label">Maximum</div><div class="dg-val">No limit</div></div>
+          <div class="dg-item"><div class="dg-label">Important</div><div class="dg-val">Irrevocable once filed</div></div>
+        </div>
+        <div class="example-box">
+          <strong>Examples:</strong> Getting a $1,200 refund and contribute $25? You'll receive $1,175. Owe $500 and contribute $25? Your payment becomes $525.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h2>File by April 15, 2026</h2>
+        <p>Submit your return by the deadline. Your contribution is processed automatically by the Franchise Tax Board — no extra forms or paperwork needed.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h2>Claim Your Federal Deduction Next Year</h2>
+        <p>Your donation qualifies as a charitable deduction on your federal taxes. Include it on <strong>Schedule A</strong> when filing your 2026 federal return.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FILING METHOD TABS -->
+  <div class="tabs-wrap">
+    <div class="section-title">Where to Find It When You File</div>
+    <div class="section-sub">Select how you file to see exact instructions.</div>
+    <div class="tab-btns">
+      <button class="tab-btn active" onclick="showTab('turbotax',this)">TurboTax®</button>
+      <button class="tab-btn" onclick="showTab('hrblock',this)">H&amp;R Block®</button>
+      <button class="tab-btn" onclick="showTab('paper',this)">Paper Filing</button>
+      <button class="tab-btn" onclick="showTab('cpa',this)">CPA / Tax Pro</button>
+      <button class="tab-btn" onclick="showTab('other',this)">CalFile &amp; Other Software</button>
+    </div>
+
+    <!-- TURBOTAX -->
+    <div class="tab-panel active" id="tab-turbotax">
+      <h3>Step A: Click "Yes" to donate</h3>
+      <p>During your California state return, TurboTax® will ask: <em>"Do you want to donate to a California special fund?"</em> Click <strong>Yes</strong>.</p>
+      <div class="img-placeholder">📸 TurboTax® — "Donate to a California Special Fund?" screen</div>
+      <h3>Step B: Scroll down and find the fund</h3>
+      <p>On the next screen, scroll to the bottom of the list. Look for <strong>"California Pediatric Cancer Research Voluntary Tax Contribution Fund"</strong> — it's near the end. Enter your donation amount in the box next to it, then click <strong>Continue</strong>.</p>
+      <div class="img-placeholder">📸 TurboTax® — "Donate to Special Funds" list (scroll to bottom)</div>
+      <div class="tip-box"><strong>Tip:</strong> You can also search "voluntary contributions" or "pediatric cancer" in the TurboTax® search bar to jump directly to the section.</div>
+    </div>
+
+    <!-- H&R BLOCK -->
+    <div class="tab-panel" id="tab-hrblock">
+      <h3>Finding the Section</h3>
+      <p>Whether you're using H&amp;R Block® online, desktop software, or filing in person with a tax professional, look for the <strong>"Voluntary Contributions"</strong> or <strong>"Donate to Special Funds"</strong> section near the end of your California state return.</p>
+      <h3>Step-by-Step Instructions</h3>
+      <ol>
+        <li>Continue through your California state return until you reach the voluntary contributions section.</li>
+        <li>Locate: <strong>California Pediatric Cancer Research Voluntary Tax Contribution Fund</strong> <span class="code-chip">Code 448</span></li>
+        <li>Enter any whole-dollar amount of <strong>$1 or more</strong>.</li>
+      </ol>
+      <div class="tip-box"><strong>Filing in person?</strong> Tell your H&amp;R Block® tax preparer: <em>"I'd like to donate to Code 448 on Form 540."</em></div>
+    </div>
+
+    <!-- PAPER -->
+    <div class="tab-panel" id="tab-paper">
+      <h3>Step-by-Step for Paper Filers</h3>
+      <ol>
+        <li>Obtain <strong>Form 540</strong> from <a href="https://ftb.ca.gov" target="_blank">ftb.ca.gov</a> or your local library.</li>
+        <li>Complete all sections of the form as usual.</li>
+        <li>Turn to <strong>Side 4</strong> and locate the <em>Contributions</em> section.</li>
+        <li>Find the line for <strong>California Pediatric Cancer Research Voluntary Tax Contribution Fund — Code 448</strong>.</li>
+        <li>Write your whole-dollar donation amount in the box to the right.</li>
+        <li>Continue completing the form, adding the contribution to any balance owed or subtracting from your refund.</li>
+        <li>Mail your completed return by <strong>April 15, 2026</strong>.</li>
+      </ol>
+      <div class="form-visual" style="margin-top:16px;">
+        <div class="form-header">FORM 540 — SIDE 4 &nbsp;·&nbsp; CONTRIBUTIONS (PAPER FILING VIEW)</div>
+        <div class="form-line highlight">
+          <span class="fl-label">CA Pediatric Cancer Research Voluntary Tax Contribution Fund</span>
+          <span class="fl-code">448</span>
+          <div class="fl-box">$ ___</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CPA -->
+    <div class="tab-panel" id="tab-cpa">
+      <h3>What to Tell Your Tax Preparer</h3>
+      <p>Simply say: <em>"I want to contribute to the California Pediatric Cancer Research Fund — Code 448 on Form 540."</em></p>
+      <p style="margin-top:10px;">Any licensed CPA, enrolled agent, or tax professional filing your California return can add this contribution. No additional paperwork is required on your end — it's handled entirely on Form 540, Side 4.</p>
+      <div class="tip-box"><strong>Tip:</strong> You can show them this guide if they need the exact fund name and code.</div>
+    </div>
+
+    <!-- OTHER -->
+    <div class="tab-panel" id="tab-other">
+      <h3>CalFile (FTB Free Filing)</h3>
+      <p>California's free filing system at <strong>ftb.ca.gov</strong> includes the voluntary contributions section automatically during the filing flow. Look for it near the end of your California state return and enter your amount when prompted.</p>
+      <h3>TaxAct®, FreeTaxUSA®, Cash App Taxes®, and Others</h3>
+      <p>All major tax software packages that support California Form 540 include the voluntary contributions section. During your California state return, search for <strong>"voluntary contributions"</strong> or <strong>"pediatric cancer"</strong> if you don't see it automatically. Enter your amount next to Code 448.</p>
+    </div>
+  </div>
+
+  <!-- ALL FILING METHODS BANNER -->
+  <div class="all-methods">
+    <h3>✓ All Filing Methods</h3>
+    <p>No matter how you file, the official contribution always appears on:</p>
+    <p><strong>California Form 540 &nbsp;·&nbsp; Side 4 – Contributions Section &nbsp;·&nbsp; Code 448</strong></p>
+    <div class="methods-grid">
+      <div class="method-chip">TurboTax®</div>
+      <div class="method-chip">H&amp;R Block®</div>
+      <div class="method-chip">TaxAct®</div>
+      <div class="method-chip">FreeTaxUSA®</div>
+      <div class="method-chip">Cash App Taxes®</div>
+      <div class="method-chip">CalFile</div>
+      <div class="method-chip">CPA / Tax Pro</div>
+      <div class="method-chip">Paper Filing</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq">
+    <div class="section-title">Common Questions</div>
+    <div class="section-sub">Quick answers to what people ask most.</div>
+
+    <details>
+      <summary>Do I need a refund to donate?</summary>
+      <div class="faq-body">No. If you owe taxes, the contribution is added to your balance. If you have a refund, it's deducted from it.</div>
+    </details>
+    <details>
+      <summary>Where does the money go?</summary>
+      <div class="faq-body">100% goes to the CA Pediatric Cancer Research Fund, administered by the UC system's Cancer Research Coordinating Committee. Over 95% goes directly to research through competitive peer review.</div>
+    </details>
+    <details>
+      <summary>Can I change my mind after filing?</summary>
+      <div class="faq-body">No. Voluntary contributions are irrevocable once your return is filed.</div>
+    </details>
+    <details>
+      <summary>Is there a maximum donation?</summary>
+      <div class="faq-body">No maximum. Any whole dollar amount of $1 or more qualifies.</div>
+    </details>
+    <details>
+      <summary>Is my donation tax-deductible?</summary>
+      <div class="faq-body">Yes. Your contribution qualifies as a charitable deduction on your federal taxes (Schedule A) in the following tax year.</div>
+    </details>
+    <details>
+      <summary>I'm a non-resident or part-year resident. Can I still donate?</summary>
+      <div class="faq-body">Yes. The voluntary contribution section also appears on Form 540NR for non-residents and part-year residents.</div>
+    </details>
+  </div>
+
+  <!-- QUOTE -->
+  <blockquote>
+    <p>"Ronil never lost hope, and neither can we."</p>
+    <cite>— Sahil Mehta, ACS CAN Legislative Ambassador</cite>
+    <div class="foundation">Neev Kolte &amp; Brave Ronil Foundation &nbsp;·&nbsp; Co-sponsored by ACS CAN</div>
+  </blockquote>
+
+  <!-- SHARE -->
+  <div class="share-bar">
+    📢 Share this page. Every contribution helps reach the $250K threshold to keep the fund alive.
+  </div>
+
+</main>
+
+<footer>
+  TurboTax® is a registered trademark of Intuit Inc. H&amp;R Block® is a registered trademark of HRB Innovations, Inc.<br>
+  TaxAct® is a registered trademark of TaxAct Inc. FreeTaxUSA® is a registered trademark of TaxHawk, Inc.<br>
+  This guide is not sponsored by, affiliated with, or endorsed by any of the above companies.<br>
+  Screenshots are used for educational/illustrative purposes in accordance with applicable permissions policies.
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
